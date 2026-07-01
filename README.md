@@ -91,4 +91,4 @@ convention in `docs/patterns/UX_MD_MERMAID.md`. seeme dogfoods itself — see `S
 
 ## License
 
-Dual-licensed under either **[Apache-2.0](LICENSE-APACHE)** or **[MIT](LICENSE-MIT)** at your option.
+Licensed under the **[Apache License, Version 2.0](LICENSE)**.
