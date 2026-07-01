@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SEEME — seeme</title>
+<!-- Derived output: regenerated from SEEME.md by /seeme. Do not hand-edit as canonical. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#2b2b33; --paper:#fcfcfb; --line:#33333a; --panel:#fff;
+  --accent:#7c5cd6; --accent-ink:#5b3fb0; --accent-soft:#efe9fb;
+  --shadow:rgba(60,50,90,.16); --barDark:#33333a;
+  --hand:'Architects Daughter',ui-rounded,system-ui,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,Menlo,Consolas,monospace;
+  --rough:14px 10px 16px 11px/11px 15px 10px 14px;
+  --rough-sm:9px 6px 10px 7px/7px 10px 6px 9px;
+}
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:var(--hand); font-size:18px; line-height:1.55;
+  background-image:radial-gradient(rgba(90,70,150,.07) .5px,transparent .5px);
+  background-size:24px 24px;
+}
+.wrap{max-width:1040px;margin:0 auto;padding:40px 22px 80px}
+.badge{display:inline-block;font-family:var(--mono);font-size:11px;background:var(--accent);
+  color:#fff;padding:2px 9px;border-radius:20px;transform:rotate(-1.5deg);margin-bottom:8px}
+header.title{border:2.5px solid var(--line);border-radius:var(--rough);background:var(--panel);
+  padding:18px 26px;margin-bottom:30px;box-shadow:6px 6px 0 var(--shadow);transform:rotate(-.4deg)}
+header.title h1{font-size:42px;margin:0;letter-spacing:1px}
+header.title .sub{font-family:var(--mono);font-size:13px;color:#6b6357;margin-top:6px}
+h2{font-size:27px;margin:48px 0 14px;padding-bottom:4px;border-bottom:3px dashed var(--accent);display:inline-block}
+h3{font-size:21px;margin:26px 0 10px;color:var(--accent-ink)}
+p{margin:10px 0} a{color:var(--accent-ink)} strong{color:var(--accent-ink)} em{color:#6b6357}
+blockquote{border-left:5px solid var(--accent);background:var(--accent-soft);margin:0 0 26px;
+  padding:12px 18px;border-radius:0 10px 10px 0;font-family:var(--mono);font-size:13px;color:#544a6b}
+ol,ul{margin:10px 0 10px 4px;padding-left:24px} li{margin:5px 0}
+code{font-family:var(--mono);font-size:.86em;background:#f0ecf9;padding:1px 5px;border-radius:5px;color:#6b4fbb}
+table{border-collapse:collapse;width:100%;margin:14px 0;font-size:14.5px;background:var(--panel);
+  border:2.25px solid var(--line);border-radius:8px;overflow:hidden;box-shadow:5px 5px 0 var(--shadow)}
+th,td{border:1px solid #d9d1ea;padding:8px 11px;text-align:left;vertical-align:top}
+th{background:var(--accent-soft);font-family:var(--hand);font-size:16px}
+.window,.mermaid{background:var(--panel);border:2.5px solid var(--line);border-radius:var(--rough);
+  box-shadow:6px 7px 0 var(--shadow);margin:20px 0;overflow:hidden}
+.titlebar{display:flex;align-items:center;gap:8px;padding:8px 14px;border-bottom:2.5px solid var(--line);
+  background:var(--accent-soft)}
+.dot{width:12px;height:12px;border-radius:50%;border:1.5px solid var(--line)}
+.dot.r{background:#ff7b72}.dot.y{background:#f5c451}.dot.g{background:#7fce8b}
+.titlebar .t{font-family:var(--hand);font-size:15px;color:#5a5247;margin-left:6px}
+pre.terminal-body{margin:0;border:0;border-radius:0;box-shadow:none;background:#fffdf9;color:#33312b;
+  padding:15px 18px;overflow-x:auto;font-family:var(--mono);font-size:12.5px;line-height:1.42}
+pre.terminal-body code{background:none;padding:0;color:inherit;font-size:inherit}
+.wf{padding-bottom:14px}.wf-body{padding:13px 14px}
+.statusbar{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:11px 14px;background:var(--accent-soft);
+  border-bottom:2.5px solid var(--line)}
+.sb-name{font-family:var(--hand);font-size:19px;font-weight:700;color:var(--accent-ink)}
+.chip{font-family:var(--mono);font-size:11px;background:#fff;border:1.5px solid var(--line);
+  border-radius:var(--rough-sm);padding:2px 8px}
+.tbl{display:grid;font-family:var(--mono);font-size:12.5px}
+.tbl .th{font-family:var(--hand);font-size:14px;font-weight:600;color:#4a4452;padding:9px 8px 6px;
+  border-bottom:2.5px solid var(--line)}
+.tbl .td{padding:8px;border-bottom:1px dashed #ddd4ee;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.td.attn{background:#fdeeec}.td.attn-first{border-left:4px solid #e8736b}
+.bang{color:#d0392b;font-weight:700;margin-right:3px}
+.cost-red{color:#c0392b;font-weight:600}.cost-yel{color:#b8860b;font-weight:600}
+.detail{margin:12px 14px 0;padding:11px 14px;background:#f6f3fc;border:2px solid var(--line);border-radius:var(--rough-sm)}
+.helpbar{display:flex;flex-wrap:wrap;gap:6px;margin:13px 14px 2px;padding-top:11px;border-top:2px dashed #ddd4ee}
+.key{font-family:var(--mono);font-size:11px;background:var(--barDark);color:#fdfdfb;border-radius:var(--rough-sm);padding:2px 7px}
+.chrome-layout{display:grid;grid-template-columns:120px minmax(0,1fr);min-height:520px}
+.sidebar{border-right:2.5px solid var(--line);padding:14px 12px;background:#fffdf9;display:flex;flex-direction:column;gap:12px}
+.brand{font-family:var(--hand);font-size:22px;color:var(--accent-ink)}
+.navitem,.conv,.profile{font-family:var(--mono);font-size:12px;border:1.5px solid transparent;padding:3px 6px;border-radius:var(--rough-sm)}
+.navitem.active,.conv.active{border-color:var(--line);background:var(--accent-soft)}
+.side-spacer{flex:1}.mainpane{padding:18px 22px 20px;display:flex;flex-direction:column;gap:16px}
+.screen-title{font-family:var(--hand);font-size:25px;color:var(--accent-ink);border-bottom:2px dashed #cfc4e8;padding-bottom:8px}
+.bubble{align-self:flex-end;max-width:72%;border:2px solid var(--line);border-radius:18px 11px 18px 13px/12px 18px 12px 17px;
+  padding:12px 16px;background:#fff;font-family:var(--mono);font-size:13px;box-shadow:4px 4px 0 var(--shadow)}
+.thinking{font-family:var(--mono);font-size:12px;color:#6b6357}
+.answer-card{border:2.5px solid var(--line);border-radius:var(--rough);background:#fff;box-shadow:5px 5px 0 var(--shadow);overflow:hidden}
+.answer-head{background:var(--accent-soft);border-bottom:2px solid var(--line);padding:10px 14px;font-family:var(--hand);font-size:17px;color:var(--accent-ink)}
+.answer-body{padding:14px;font-family:var(--mono);font-size:12.5px;display:grid;gap:10px}
+.confidence{display:flex;align-items:center;gap:8px}.meter{width:120px;height:18px;border:1.5px solid var(--line);border-radius:var(--rough-sm);overflow:hidden;background:#f6f3fc}
+.meter span{display:block;height:100%;width:82%;background:var(--barDark)}
+.composer{margin-top:auto;border:2.5px solid var(--line);border-radius:var(--rough-sm);display:grid;grid-template-columns:auto 1fr auto;gap:10px;
+  align-items:center;padding:11px 14px;background:#fff;font-family:var(--mono);font-size:13px}
+.filterbar{font-family:var(--mono);font-size:12px;color:#6b6357}
+.panel-lines{display:grid;gap:10px;padding:14px}
+.panel-line{height:28px;border:2px solid var(--line);border-radius:var(--rough-sm);background:#fff}
+.screen-grid{display:grid;gap:14px;padding:14px;align-items:stretch}
+.screen-rail,.screen-main,.screen-panel{border:2px solid var(--line);border-radius:var(--rough-sm);background:#fffdf9;
+  padding:12px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.screen-rail{background:#f8f5fe}.screen-main{background:#fff}.screen-main.single{min-height:180px}
+.screen-row{font-family:var(--mono);font-size:12.5px;border:1.5px solid #d9d1ea;border-radius:var(--rough-sm);
+  padding:7px 9px;background:#fff;min-height:30px;overflow-wrap:anywhere}
+.screen-cmd{font-family:var(--mono);font-size:12.5px;color:#33312b;padding:12px 16px 4px;
+  white-space:pre-wrap;overflow-wrap:anywhere}
+.screen-row.title{font-family:var(--hand);font-size:18px;color:var(--accent-ink);border-style:dashed;background:var(--accent-soft)}
+.screen-row.nav{background:#fff;border-color:transparent}.screen-row.active{border-color:var(--line);background:var(--accent-soft)}
+.screen-row.field{display:grid;grid-template-columns:minmax(88px,.5fr) minmax(0,1fr);gap:8px;align-items:center}
+.screen-row.field b{font-family:var(--hand);font-size:14px;color:var(--accent-ink)}
+.screen-section{border:2px solid var(--line);border-radius:var(--rough);box-shadow:4px 4px 0 var(--shadow);
+  background:#fff;overflow:hidden;display:grid;gap:0}
+.screen-section .section-head{font-family:var(--hand);font-size:16px;color:var(--accent-ink);background:var(--accent-soft);
+  border-bottom:2px solid var(--line);padding:8px 10px}
+.screen-section .section-body{display:grid;gap:7px;padding:10px}
+.mermaid,.mermaid-static{padding:18px;text-align:center}
+.mermaid-static{background:var(--panel);border:2.5px solid var(--line);border-radius:var(--rough);
+  box-shadow:6px 7px 0 var(--shadow);margin:20px 0;overflow:auto}
+.mermaid-static svg{max-width:100%;height:auto}
+.mermaid-fallback{white-space:pre-wrap;text-align:left;font-family:var(--mono);font-size:12.5px}
+footer{margin-top:50px;font-family:var(--mono);font-size:12px;color:#8a8170;text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <span class="badge">UX-MD + Mermaid · /seeme · hand-drawn render</span>
+  <div id="content"><p style="font-family:var(--mono)">Rendering…</p></div>
+  <footer>Rendered from <code>SEEME.md</code> · derived output, regenerate with <code>/seeme render</code></footer>
+</div>
+
+<script type="text/markdown" id="seeme-src">
+# SEEME — seeme
+
+> Visual spec in the **UX-MD+Mermaid** convention, generated/maintained via `/seeme`.
+> README tells; SEEME shows. `visualize` adds focused visuals inside existing docs.
+> Freshness: reviewed via `/seeme` on 2026-06-30 at commit `b292509`.
+
+## 1. Product frame & target user
+
+seeme gives agents two visual documentation verbs. **`/seeme`** reads a repo's PRDs, plans, specs,
+and code and writes a standalone **`SEEME.md`**: a faithful, visual explanation of the product's UIs.
+When sharing is needed, it renders that source into **`SEEME.html`**. **`/visualize`** edits an
+existing doc in place, adding a compact visual block next to the relevant prose.
+**Target user:** anyone (human or agent) who needs to understand "what does this look like and how
+does it work?" without launching it. **Success:** that understanding in minutes, on GitHub, and
+refreshable in one command.
+
+## 2. Information architecture
+
+```terminal title="seeme information architecture"
+agent skills
+├─ /seeme
+│  ├─ reads   → PRD · plans (docs/implementation/*_PLAN.md) · specs · architecture · CODE (truth)
+│  ├─ writes  → SEEME.md  (repo root; one section per surface)
+│  └─ renders → SEEME.html  (derived shareable artifact)
+│               each surface = 6 parts: frame · IA · wireframes · flowchart · sequence · principles
+└─ /visualize
+   ├─ asks   → target file/section or explicit --all directory when omitted
+   ├─ reads  → target doc section or bounded Markdown directory scan
+   ├─ tracks → managed block id + source marker
+   └─ edits  → insert, replace, or skip one compact visual block near relevant prose
+
+repo layout
+├─ skills/seeme/SKILL.md         the skill (canonical source; `make install` → ~/.claude, ~/.codex)
+├─ skills/visualize/SKILL.md     in-place doc visual block skill
+├─ docs/PRD.md                   what seeme is + the SEEME.md contract
+├─ docs/patterns/UX_MD_MERMAID.md  the 6-part convention + Mermaid gotchas
+└─ SEEME.md                      this file (dogfood)
+```
+
+## 3. Markdown wireframes
+
+**(a) Invocation** — the agent surface:
+
+```terminal title="seeme invocation"
+❯ /seeme                         → SEEME.md for the whole product
+❯ /seeme dashboard               → one surface
+❯ /seeme --update                → refresh existing SEEME.md from current docs/code
+❯ /seeme render                  → SEEME.html from existing SEEME.md
+❯ /seeme --html                  → refresh SEEME.md, then render SEEME.html
+❯ /visualize README.md onboarding
+                                  → insert or update visual block near onboarding text
+❯ /visualize docs/ --all          → scan Markdown files under docs/ with guardrails
+  …or just: "seeme this repo" / "add a flowchart to the getting started guide"
+```
+
+**(b) What a generated SEEME.md looks like** (per surface):
+
+```diagram title="generated SEEME.md structure"
+┌─ SEEME.md ─────────────────────────────────────────────┐
+│ 1. Product frame & target user                         │
+│ 2. Information architecture / navigation   (text tree) │
+│ 3. Markdown wireframes        ┌─ screen ─┐  (the real  │
+│                               │ …        │   labels)   │
+│                               └──────────┘             │
+│ 4. Mermaid flowchart          (the core process)       │
+│ 5. Mermaid sequence diagram   (user ↔ app ↔ system)    │
+│ 6. Design principles → evidence  (→ real code paths)   │
+└─────────────────────────────────────────────────────────┘
+```
+
+## 4. Mermaid flowchart — the /seeme process
+
+```mermaid
+flowchart TD
+    A["/seeme invoked"] --> B{Mode}
+    B -- render --> R[Render SEEME.md into SEEME.html]
+    B -- default or update --> C{Scope given}
+    B -- html --> D[Refresh source then render HTML]
+    D --> C
+    C -- a surface --> E[Target that surface]
+    C -- none --> F[Whole product: a section per surface]
+    E --> G[Discover sources: PRD, plans, specs, CODE]
+    F --> G
+    G --> H{Docs vs code disagree}
+    H -- yes --> I[Code is truth: render reality, flag drift]
+    H -- no --> J[Synthesize 6-part UX-MD+Mermaid]
+    I --> J
+    J --> K[Validate Mermaid gotchas]
+    K --> L{SEEME.md exists}
+    L -- yes --> M[Update section-by-section, flag changes]
+    L -- no --> N[Create SEEME.md at repo root]
+    M --> O{HTML requested}
+    N --> O
+    O -- yes --> S[Use render template asset]
+    S --> T[Render Markdown before Mermaid]
+    T --> U[Dynamic Mermaid import with pre fallback]
+    U --> R
+    O -- no --> P[Done: README tells, SEEME shows]
+    R --> Q[Done: SEEME.html shareable]
+```
+
+## 4b. Mermaid flowchart — the /visualize process
+
+```mermaid
+flowchart TD
+    A["/visualize invoked"] --> B{Target specified}
+    B -- no --> C[Ask: file or all directory scan]
+    B -- file or section --> D[Read nearby prose and source context]
+    B -- all directory --> E[Scan md and mdx files with guardrails]
+    C --> D
+    C --> E
+    E --> F[Rank relevant sections]
+    F --> D
+    D --> G[Compute stable managed block id]
+    G --> H{Existing block}
+    H -- unchanged --> I[Skip duplicate]
+    H -- changed --> J[Replace managed block]
+    H -- absent --> K[Insert near relevant prose]
+    I --> L[Validate fences and Mermaid gotchas]
+    J --> L
+    K --> L
+    L --> M[Done: report changed and skipped files]
+```
+
+## 5. Mermaid sequence diagram
+
+```mermaid
+sequenceDiagram
+    actor User
+    participant Agent as Seeme agent
+    participant Repo as Repo docs and code
+    participant Out as SEEME.md
+
+    User->>Agent: /seeme {scope or render}
+    Agent->>Repo: discover PRD / plans / specs / code
+    Repo-->>Agent: real screens, columns, keys, states
+    Agent->>Agent: synthesize 6-part view; validate Mermaid
+    Agent->>Out: create or update SEEME.md section-by-section
+    Agent->>Out: render SEEME.html when requested
+    Out-->>User: a visual spec and optional shareable HTML
+```
+
+```mermaid
+sequenceDiagram
+    actor User
+    participant Agent as Visualize agent
+    participant Doc as Existing doc
+    participant Repo as Source context
+
+    User->>Agent: /visualize README.md onboarding
+    Agent->>Doc: confirm target file and section
+    Agent->>Doc: read target section and nearby prose
+    Agent->>Repo: inspect source when behavior must be faithful
+    Repo-->>Agent: labels, states, actions, data flow
+    Agent->>Doc: find visualize block by stable id
+    Agent->>Doc: skip unchanged or replace managed block
+    Doc-->>User: same doc, clearer at point of need
+```
+
+## 6. Design principles → evidence
+
+| Principle | Mechanism | Evidence |
+|-----------|-----------|----------|
+| **Faithful to code** | read the implementation; code wins over stale docs | step 2/F of the skill flagged drift instead of copying |
+| **Show, don't tell** | wireframes + diagrams over prose | this file is mostly diagrams |
+| **Convergent** | the 6–10 things that matter, ranked | per-surface, not per-screen exhaustion |
+| **Renderable anywhere** | plain Markdown + validated Mermaid | the gotchas in `docs/patterns/UX_MD_MERMAID.md` |
+| **Skill-first** | the synthesis is LLM work; a binary can't | `skills/seeme/SKILL.md` and `skills/visualize/SKILL.md` are the product |
+| **Idempotent** | `--update` refreshes sections, keeps hand-notes | step 4 of the skill flow |
+| **Shareable rendering** | HTML is derived from Markdown, not canonical | `/seeme render` produces `SEEME.html` |
+| **Resilient rendering** | Markdown renders before Mermaid, diagrams degrade to source | render template avoids blank pages when CDN fails |
+| **Point-of-need visuals** | in-place diagrams clarify local prose | `/visualize` edits existing docs without creating SEEME.md |
+| **No duplicate diagrams** | managed block ids make reruns idempotent | `/visualize` skips or replaces existing visual blocks |
+| **Bounded edits** | explicit target or `--all` directory controls blast radius | `/visualize` asks before mutating unspecified docs |
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/marked@12/marked.min.js"></script>
+<script>
+(function () {
+  const el = (tag, cls, txt) => {
+    const e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (txt != null) e.textContent = txt;
+    return e;
+  };
+  const esc = (s) => s.replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+  const titlebar = (t) => {
+    const tb = el('div', 'titlebar');
+    tb.append(el('span', 'dot r'), el('span', 'dot y'), el('span', 'dot g'), el('span', 't', t || 'wireframe'));
+    return tb;
+  };
+  const UI_KINDS = /^(wireframe|screen)$/i;
+  const TERM_KINDS = /^(terminal|console|tree|diagram)$/i;   // verbatim mono cards (diagram = static ASCII/ER/schema/table)
+  const srcEl = document.getElementById('seeme-src');
+  const src = srcEl ? srcEl.textContent : '';
+  const mermaidSvgs = staticMermaidSvgs();
+  let mermaidSvgCursor = 0;
+  const blocks = [];
+  const blockRE = /```([^\n`]*)\n([\s\S]*?)```/g;
+  const prepped = src.replace(blockRE, (_, info, code) => {
+    const rawInfo = (info || '').trim();
+    const kind = rawInfo.split(/\s+/)[0] || '';
+    if (!(kind === 'mermaid' || UI_KINDS.test(kind) || TERM_KINDS.test(kind))) return _;
+    blocks.push({ kind, info: rawInfo, code: code.replace(/\s+$/, '') });
+    return '\n<div class="seeme-block-src" data-idx="' + (blocks.length - 1) + '"></div>\n';
+  });
+  const content = document.getElementById('content');
+  content.innerHTML = typeof marked === 'undefined'
+    ? fallbackMarkdown(prepped)
+    : marked.parse(prepped, { gfm: true, breaks: false });
+  document.querySelectorAll('.seeme-block-src').forEach(ph => {
+    const b = blocks[+ph.dataset.idx];
+    try {
+      ph.replaceWith(renderExtractedBlock(b));
+    } catch (err) {
+      console.error('seeme block render failed; showing source block instead:', err);
+      ph.replaceWith(terminalBlock({ info: b ? b.info : '', code: b ? b.code : 'unavailable block source' }));
+    }
+  });
+  document.querySelectorAll('#content pre').forEach(pre => {
+    if (pre.closest('.window')) return;
+    try {
+      const lang = languageFor(pre);
+      if (TERM_KINDS.test(lang)) terminalize(pre, titleFor(pre.textContent));
+      else if ((UI_KINDS.test(lang) || !lang) && looksLikeAppScreen(pre.textContent)) pre.replaceWith(wireframeBlock({ info: '', code: pre.textContent }));
+      else terminalize(pre, titleFor(pre.textContent));
+    } catch (err) {
+      console.error('seeme legacy code block render failed; showing source block instead:', err);
+      terminalize(pre, titleFor(pre.textContent));
+    }
+  });
+
+  function renderExtractedBlock(b) {
+    if (b.kind === 'mermaid') return mermaidBlock(b);
+    if (TERM_KINDS.test(b.kind)) return terminalBlock(b);   // terminal/console/tree: always faithful
+    // wireframe/screen: RE-DRAW as hand-sketched UI only when the content is genuinely an
+    // interactive app/TUI screen. Command transcripts (prompt + output), ER/schema diagrams, and
+    // data tables are shown VERBATIM instead — reinterpreting them through the nav/chat/composer
+    // heuristics is what inverted "terminal drawn as napkin, TUI drawn as raw ASCII". A leading
+    // `$ invocation` line does NOT demote a screen: a persistent TUI (panels, live status, columns)
+    // is still a screen. See looksLikeAppScreen for the structural signals used to decide.
+    if (UI_KINDS.test(b.kind) && looksLikeAppScreen(b.code)) return wireframeBlock(b);
+    return terminalBlock(b);
+  }
+  function languageFor(pre) {
+    const code = pre.querySelector('code');
+    const cls = (code ? code.className : '') + ' ' + pre.className;
+    const m = cls.match(/language-([^\s]+)/);
+    return m ? m[1] : '';
+  }
+  function fallbackMarkdown(md) {
+    const out = [];
+    let para = [];
+    const flush = () => {
+      if (!para.length) return;
+      out.push('<p>' + para.map(escInline).join(' ') + '</p>');
+      para = [];
+    };
+    md.split('\n').forEach(line => {
+      if (/^<div class="seeme-block-src"/.test(line)) {
+        flush();
+        out.push(line);
+      } else if (/^#\s+/.test(line)) {
+        flush();
+        out.push('<h1>' + escInline(line.replace(/^#\s+/, '')) + '</h1>');
+      } else if (/^##\s+/.test(line)) {
+        flush();
+        out.push('<h2>' + escInline(line.replace(/^##\s+/, '')) + '</h2>');
+      } else if (/^###\s+/.test(line)) {
+        flush();
+        out.push('<h3>' + escInline(line.replace(/^###\s+/, '')) + '</h3>');
+      } else if (/^>\s?/.test(line)) {
+        flush();
+        out.push('<blockquote>' + escInline(line.replace(/^>\s?/, '')) + '</blockquote>');
+      } else if (/^\s*[-*]\s+/.test(line)) {
+        flush();
+        out.push('<ul><li>' + escInline(line.replace(/^\s*[-*]\s+/, '')) + '</li></ul>');
+      } else if (!line.trim()) {
+        flush();
+      } else {
+        para.push(line.trim());
+      }
+    });
+    flush();
+    return out.join('\n');
+  }
+  function escInline(s) {
+    return esc(s)
+      .replace(/`([^`]+)`/g, '<code>$1</code>')
+      .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+  }
+  function attr(info, name) {
+    const m = info.match(new RegExp(name + '="([^"]+)"'));
+    return m ? m[1] : '';
+  }
+  function mermaidBlock(b) {
+    const svg = mermaidSvgs[mermaidSvgCursor++];
+    if (svg) {
+      const d = el('div', 'mermaid-static');
+      d.innerHTML = svg;
+      return d;
+    }
+    const d = el('div', 'mermaid');
+    d.textContent = b.code;
+    return d;
+  }
+  function staticMermaidSvgs() {
+    const data = document.getElementById('seeme-mermaid-svg');
+    if (!data) return [];
+    try {
+      const parsed = JSON.parse(data.textContent || '[]');
+      return Array.isArray(parsed) ? parsed : [];
+    } catch (err) {
+      console.error('seeme static Mermaid SVG parse failed; using runtime Mermaid:', err);
+      return [];
+    }
+  }
+  function terminalBlock(b) {
+    const kind = (b.kind || '').toLowerCase();
+    // A verbatim card is already framed by the window chrome (titlebar + border). If the source
+    // wrapped its content in one redundant full-bleed ASCII box, drop that outer frame so we don't
+    // render a box inside a box. `diagram`/`tree` keep their drawing — there the box IS the content.
+    const body = (kind === 'diagram' || kind === 'tree') ? b.code : unframe(b.code);
+    const pre = el('pre', 'terminal-body');
+    pre.textContent = body;
+    const win = el('div', 'window');
+    win.append(titlebar(attr(b.info, 'title') || titleFor(body)), pre);
+    return win;
+  }
+  // Strip a single full outer ASCII frame that wraps the ENTIRE block (top border, `│ … │` sides,
+  // bottom border, optional `├──┤` interior rules). Leaves content untouched if it isn't a clean
+  // full wrapper — e.g. a `$ cmd` line above the box, or partial/connector box-art — so genuine tool
+  // output and diagrams survive verbatim.
+  function unframe(code) {
+    const lines = code.replace(/\t/g, '    ').split('\n');
+    while (lines.length && !lines[0].trim()) lines.shift();
+    while (lines.length && !lines[lines.length - 1].trim()) lines.pop();
+    if (lines.length < 3) return code;
+    if (!/^[┌╔][─═].*[┐╗]$/.test(lines[0].trim())) return code;
+    if (!/^[└╚][─═].*[┘╝]$/.test(lines[lines.length - 1].trim())) return code;
+    const inner = lines.slice(1, -1);
+    const wraps = inner.every(l => {
+      const t = l.trim();
+      return t === '' || /^[│|].*[│|]$/.test(t) || /^[├╟][─═].*[┤╢]$/.test(t);
+    });
+    if (!wraps) return code;
+    const stripped = inner
+      .filter(l => !/^[├╟][─═].*[┤╢]$/.test(l.trim()))
+      .map(l => l.replace(/^\s*[│|]\s?/, '').replace(/\s?[│|]\s*$/, '').replace(/\s+$/, ''));
+    const widths = stripped.filter(s => s.trim()).map(s => (s.match(/^ */)[0] || '').length);
+    const indent = widths.length ? Math.min(...widths) : 0;
+    return stripped.map(s => s.slice(indent)).join('\n').replace(/\n{3,}/g, '\n\n').replace(/^\n+|\n+$/g, '');
+  }
+  function terminalize(pre, title) {
+    if (pre.closest('.window')) return;
+    const win = el('div', 'window');
+    pre.classList.add('terminal-body');
+    pre.parentNode.insertBefore(win, pre);
+    win.append(titlebar(title), pre);
+  }
+  function titleFor(txt) {
+    if (/^[\s│|]*[$❯]\s/m.test(txt)) return 'terminal';
+    if (/[├└│─]/.test(txt)) return 'tree';
+    return 'console';
+  }
+  // Decide whether framed ASCII is a genuine INTERACTIVE app/TUI screen (→ redraw as sketch UI) vs
+  // VERBATIM content (transcript, run/build log, ER schema, data table → show ASCII as-is). A sketch
+  // redraw only helps surfaces a wireframe clarifies: real side-by-side columns/panels, a composer,
+  // nav, or action buttons on an app. Log/run OUTPUT is a single stream of text and reads better
+  // verbatim EVEN when ornamented with progress (`2/6`), gate/`[PASS]` badges, spinners (`⟳`), or
+  // `▸` markers — those are not interactivity. Frame shape is likewise no signal (everything is boxed).
+  function looksLikeAppScreen(txt) {
+    const parsed = parseFramedScreen(txt);
+    const cols = parsed ? Math.max(1, ...parsed.bands.map(b => b.cols.length)) : 1;
+    const composer = /\bask anything\b|\btype (?:a )?message\b|\[\s*send\s*\]/i.test(txt);
+    const chat = /\buser\s*:|\bassistant\s*:|thinking\s*(?:…|\.\.\.)/i.test(txt);
+    const nav = /\bsidebar\b|\bnav(?:bar)?\b|\bmenu\b|\btabs?\b/i.test(txt);
+    const buttons = /\[(?:[A-Z][a-z]+|OK)\]/.test(txt);   // [Send] [Sync] [Save] — capitalized action controls
+    const appword = /\b(admin|overview|dashboard|panel|composer|conversation|inbox|settings|profile|login)\b/i.test(txt);
+    return cols >= 2 || composer || chat || nav || (buttons && appword);
+  }
+  function wireframeBlock(b) {
+    const title = attr(b.info, 'title') || firstLineTitle(b.code) || 'screen';
+    // Draw from the block's ACTUAL framed content. (No content-keyword chat special-case: it
+    // misfired on any screen containing words like "sources"/"confidence"/"evidence" and stamped
+    // a hardcoded chat mockup over unrelated screens such as the ontology graph and admin overview.)
+    const framed = framedWireframeBlock(b, title);
+    if (framed) return framed;
+    const win = el('div', 'window');
+    win.appendChild(titlebar(title));
+    const body = el('div', 'wf');
+    const regions = frameRegions(b.code);
+    const lines = regions.flat();
+    const tableRegion = regions.find(r => tableByHeaderOffsets(r));
+    const head = lines[0] || title;
+    const status = el('div', 'statusbar');
+    status.appendChild(el('span', 'sb-name', head.slice(0, 44)));
+    lines.slice(1, Math.min(lines.length, 4)).forEach(l => status.appendChild(el('span', 'chip', l.slice(0, 34))));
+    body.appendChild(status);
+    if (tableRegion) body.appendChild(tableFrom(tableRegion));
+    const detailLines = lines.filter(l => /:|ACTION|Branch|Base|NEXT/i.test(l)).slice(0, 3);
+    if (detailLines.length) {
+      const detail = el('div', 'detail');
+      detailLines.forEach(l => detail.appendChild(el('div', '', l)));
+      body.appendChild(detail);
+    }
+    const help = lines.find(l => /q:|enter:|space|help|\?:/i.test(l));
+    if (help) {
+      const hb = el('div', 'helpbar');
+      help.split(/\s+/).filter(Boolean).forEach(k => hb.appendChild(el('span', 'key', k)));
+      body.appendChild(hb);
+    }
+    win.appendChild(body);
+    return win;
+  }
+  function framedWireframeBlock(b, title) {
+    const parsed = parseFramedScreen(b.code);
+    if (!parsed) return null;
+    const win = el('div', 'window');
+    win.appendChild(titlebar(title));
+    const body = el('div', 'wf');
+    (parsed.pre || []).forEach(l => body.appendChild(el('div', 'screen-cmd', l)));   // e.g. a `$ cmd` line above the box
+    parsed.bands.forEach(band => body.appendChild(renderBand(band)));
+    (parsed.post || []).forEach(l => body.appendChild(el('div', 'screen-cmd', l)));
+    win.appendChild(body);
+    return win;
+  }
+  // Parse a box-drawn screen into horizontal BANDS (split at full-width interior dividers); each
+  // band is split into COLUMNS by the vertical separators its rows actually share. This replaces the
+  // old "first column is always a narrow rail" assumption (which squished table-first dashboards).
+  function parseFramedScreen(code) {
+    const all = code.replace(/\t/g, '    ').split('\n');
+    const topIdx = all.findIndex(l => /[┌╔]/.test(l) && /[┐╗]/.test(l));
+    let botIdx = -1;
+    for (let i = all.length - 1; i >= 0; i--) { if (/[└╚]/.test(all[i]) && /[┘╝]/.test(all[i])) { botIdx = i; break; } }
+    if (topIdx < 0 || botIdx <= topIdx) return null;
+    const region = all.slice(topIdx, botIdx + 1);
+    const indent = Math.min(...region.filter(l => l.trim()).map(l => (l.match(/^\s*/)[0] || '').length));
+    const body = region.slice(1, region.length - 1).map(l => l.slice(indent));
+    if (!body.length) return null;
+    const dividerLine = l => {
+      const t = l.trim();
+      if (!t || !/[─═]/.test(t)) return false;
+      const boxish = (t.match(/[─═┼┬┴├┤┌┐└┘╟╢╫│|+]/g) || []).length;
+      return boxish >= t.length - 2; // a line made almost entirely of box-drawing chars
+    };
+    const bands = [];
+    let cur = [];
+    body.forEach(l => { if (dividerLine(l)) { if (cur.length) { bands.push(cur); cur = []; } } else cur.push(l); });
+    if (cur.length) bands.push(cur);
+    const parsedBands = bands.map(rows => ({ cols: splitColumns(rows) })).filter(b2 => b2.cols.length);
+    // Preamble/postamble: content outside the box (e.g. a `$ command` line above it) — keep it,
+    // rendered as a mono command line, instead of dropping it.
+    const pre = all.slice(0, topIdx).map(l => l.trim()).filter(Boolean);
+    const post = all.slice(botIdx + 1).map(l => l.trim()).filter(Boolean);
+    return parsedBands.length ? { bands: parsedBands, pre, post } : null;
+  }
+  function splitColumns(rows) {
+    const width = Math.max(...rows.map(r => r.length));
+    const counts = new Array(width + 2).fill(0);
+    rows.forEach(r => { for (let i = 0; i < r.length; i++) if (r[i] === '│' || r[i] === '|') counts[i]++; });
+    // Cluster adjacent bar positions: hand-drawn ASCII jitters a separator across ±1-2 columns, so a
+    // strict per-column count misses real separators/edges. Sum each run (gap <= 1) and keep the peak.
+    const clusters = [];
+    for (let i = 0; i <= width;) {
+      if (!counts[i]) { i++; continue; }
+      let j = i, total = 0, peak = i, peakC = 0;
+      while (j <= width && (counts[j] || counts[j + 1])) {
+        total += counts[j];
+        if (counts[j] > peakC) { peakC = counts[j]; peak = j; }
+        j++;
+      }
+      clusters.push({ pos: peak, total });
+      i = j;
+    }
+    const thresh = Math.max(1, Math.ceil(rows.length * 0.6));
+    const bars = clusters.filter(c => c.total >= thresh).map(c => c.pos);
+    if (bars.length < 2) return [makeCol(rows, 0, width)]; // no reliable frame edges → single column
+    const cols = [];
+    for (let c = 0; c < bars.length - 1; c++) cols.push(makeCol(rows, bars[c] + 1, bars[c + 1]));
+    return cols.filter(c => c.lines.length);
+  }
+  function cleanCell(l) {
+    return l.replace(/[┌┐└┘├┤┬┴┼╟╢╫]/g, ' ').replace(/[│|]/g, ' ').replace(/\s{2,}/g, ' ').trim();
+  }
+  function makeCol(rows, s, e) {
+    const raw = rows.map(r => r.slice(s, e).replace(/[─═]{2,}/g, ' ').replace(/\s+$/, ''));
+    const lines = raw.map(cleanCell).filter(Boolean);
+    return { width: e - s, raw, lines };
+  }
+  function renderBand(band) {
+    const cols = band.cols;
+    const grid = el('div', 'screen-grid');
+    if (cols.length === 1) {
+      grid.style.gridTemplateColumns = 'minmax(0, 1fr)';
+      grid.appendChild(renderRegion(cols[0], 'screen-main single'));
+      return grid;
+    }
+    const total = cols.reduce((a, c) => a + c.width, 0) || 1;
+    const narrow = c => c.width <= 16 || c.width < total * 0.24; // rail = the genuinely narrow column
+    grid.style.gridTemplateColumns = cols.map(c => narrow(c) ? 'minmax(76px, .2fr)' : 'minmax(0, 1fr)').join(' ');
+    cols.forEach(c => grid.appendChild(renderRegion(c, narrow(c) ? 'screen-rail' : 'screen-main')));
+    return grid;
+  }
+  function renderRegion(col, cls) {
+    if (!cls.includes('rail')) {
+      const raw = col.raw;
+      let h = 0; while (h < raw.length && !raw[h].trim()) h++;      // header = first non-blank line
+      let e = h; while (e < raw.length && raw[e].trim()) e++;       // table run = header + contiguous rows
+      const t = tableByHeaderOffsets(raw.slice(h, e));
+      const dataRows = t ? t.rows.filter(r => r.some(Boolean)) : [];
+      // A real table needs CLEAN, short header tokens (e.g. SLUG NATURE STATE). This rejects a
+      // status panel of "LABEL ▸ free-text description: …" lines (which 2-space gaps would otherwise
+      // mis-read as a 2-column table).
+      const cleanHeader = t && t.headers.every(x => x.length <= 14 && !/[:()]/.test(x) && /\S/.test(x));
+      const aligned = cleanHeader && t.headers.length >= 2 && dataRows.filter(r => r.filter(Boolean).length >= 2).length >= 2;
+      if (aligned) {
+        const wrap = el('div', cls);
+        wrap.appendChild(tableFromRows(t.headers, dataRows));
+        raw.slice(e).map(cleanCell).filter(Boolean).forEach(l => wrap.appendChild(rowFor(l))); // trailing lines (legend, notes)
+        return wrap;
+      }
+    }
+    return renderScreenColumn(col.lines, cls);
+  }
+  function renderScreenColumn(lines, cls) {
+    const col = el('div', cls);
+    let section = null;
+    const flushSection = () => { if (section) col.appendChild(section), section = null; };
+    lines.forEach((line, i) => {
+      if (!line) return;
+      if (/^(K|[A-Z][A-Z0-9_-]{1,8})$/.test(line) && cls.includes('rail')) {
+        flushSection();
+        col.appendChild(el('div', 'brand', line));
+        return;
+      }
+      if (/^(CHAT|\+|#|conv|admin|settings|login|home|nav|tab)/i.test(line) && cls.includes('rail')) {
+        flushSection();
+        col.appendChild(el('div', 'screen-row nav' + (/CHAT|home|conv1|admin/i.test(line) ? ' active' : ''), line));
+        return;
+      }
+      if (i === 0 || /\b(title|overview|dashboard|screen|surface)\b/i.test(line)) {
+        flushSection();
+        col.appendChild(el('div', 'screen-row title', line));
+        return;
+      }
+      if (/user:\s*/i.test(line)) {
+        flushSection();
+        col.appendChild(el('div', 'bubble', line.replace(/^.*user:\s*/i, '')));
+        return;
+      }
+      if (/thinking|loading|stream/i.test(line)) {
+        flushSection();
+        col.appendChild(el('div', 'thinking', line));
+        return;
+      }
+      if (/\b(evidence|answer|sources|provenance|confidence|feedback)\b/i.test(line) && !/^[^:]{2,28}:\s+/.test(line)) {
+        if (!section) {
+          section = el('section', 'screen-section');
+          section.appendChild(el('div', 'section-head', line));
+          section.appendChild(el('div', 'section-body'));
+        } else {
+          section.querySelector('.section-body').appendChild(rowFor(line));
+        }
+        return;
+      }
+      if (/\b(ask anything|send|filter|search|submit|save|cancel)\b/i.test(line)) {
+        flushSection();
+        col.appendChild(el('div', 'composer', line));
+        return;
+      }
+      // key: value field — only for a CLEAN key (alnum/space/_/-/.). Excludes status-panel lines
+      // like "[build] classify: …" or "STEP ▸ plan: …" (brackets/arrows), which stay plain rows.
+      if (/^[A-Za-z0-9][\w .\-]{1,22}:\s+\S/.test(line)) {
+        flushSection();
+        const row = el('div', 'screen-row field');
+        const parts = line.split(/:\s+/, 2);
+        row.append(el('b', '', parts[0]), el('span', '', parts[1]));
+        col.appendChild(row);
+        return;
+      }
+      if (section) section.querySelector('.section-body').appendChild(rowFor(line));
+      else col.appendChild(rowFor(line));
+    });
+    flushSection();
+    if (!col.children.length) col.appendChild(el('div', 'screen-row', 'empty'));
+    return col;
+  }
+  function rowFor(line) {
+    return el('div', 'screen-row' + (/!|warning|error|blocked|required/i.test(line) ? ' attn' : ''), line);
+  }
+  function isBorderLine(line) {
+    return /^[\s│|]*[┌╔└╚├╟+][─═\-+┼╫]{3,}.*[┐╗┘╝┤╢+│|]\s*$/.test(line);
+  }
+  function isTopOrBottom(line) {
+    return /^[\s│|]*[┌╔└╚+][─═\-+]{3,}.*[┐╗┘╝+]\s*$/.test(line);
+  }
+  function stripFrameCell(line) {
+    return line.replace(/^\s*[│|]\s?/, '').replace(/\s?[│|]\s*$/, '');
+  }
+  function frameRegions(code) {
+    const regions = [];
+    let current = [];
+    code.split('\n').forEach(line => {
+      if (isBorderLine(line)) {
+        if (current.length) regions.push(current), current = [];
+        return;
+      }
+      if (!isTopOrBottom(line)) {
+        const cleaned = stripFrameCell(line);
+        if (cleaned.trim()) current.push(cleaned);
+      }
+    });
+    if (current.length) regions.push(current);
+    return regions.length ? regions : [code.split('\n').filter(l => l.trim())];
+  }
+  function tableFrom(lines) {
+    const split = (l) => l.split(/\s{2,}/).map(x => x.trim()).filter(Boolean);
+    const headers = split(lines[0] || '');
+    const offsetRows = tableByHeaderOffsets(lines);
+    if (offsetRows) return tableFromRows(offsetRows.headers, offsetRows.rows);
+    return tableFromRows(headers, lines.slice(1, 8).map(row => split(row).slice(0, Math.max(headers.length, 1))));
+  }
+  function tableByHeaderOffsets(lines) {
+    const header = lines[0] || '';
+    const matches = [...header.matchAll(/\S+(?:\s\S+)*?(?=\s{2,}|$)/g)];
+    if (matches.length < 2) return null;
+    const starts = matches.map(m => m.index);
+    const headers = starts.map((start, i) => header.slice(start, starts[i + 1] || header.length).trim()).filter(Boolean);
+    if (headers.length < 2) return null;
+    const rows = lines.slice(1, 8).map(line => starts.map((start, i) => line.slice(start, starts[i + 1] || line.length).trim()));
+    return { headers, rows };
+  }
+  function tableFromRows(headers, rows) {
+    const cols = Math.max(headers.length, 1);
+    const tbl = el('div', 'tbl');
+    tbl.style.gridTemplateColumns = 'repeat(' + cols + ', minmax(0, 1fr))';
+    headers.forEach(h => tbl.appendChild(el('div', 'th', h)));
+    rows.forEach(row => row.slice(0, cols).forEach((cell, i) => {
+      const cost = cell.match(/^~?(\d+(?:\.\d+)?)x$/);
+      let cls = 'td' + (/^!|action|required|fail|error|blocked/i.test(cell) ? ' attn' : '') + (i === 0 && /^!/.test(cell) ? ' attn-first' : '');
+      if (cost) cls += Number(cost[1]) >= 2 ? ' cost-red' : Number(cost[1]) >= 1.5 ? ' cost-yel' : '';
+      const d = el('div', cls);
+      if (i === 0 && /^!/.test(cell)) {
+        d.appendChild(el('span', 'bang', '!'));
+        d.appendChild(document.createTextNode(cell.replace(/^!\s*/, '')));
+      } else {
+        d.textContent = cell;
+      }
+      tbl.appendChild(d);
+    }));
+    return tbl;
+  }
+  function firstLineTitle(code) {
+    const line = code.split('\n').find(Boolean) || '';
+    return line.replace(/[┌┐└┘├┤│─═]/g, '').trim().slice(0, 48);
+  }
+
+  const sourcePre = src => { const pre = el('pre', 'terminal-body mermaid-fallback'); pre.textContent = src; return pre; };
+  import('https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs')
+    .then(async m => {
+      m.default.initialize({
+        startOnLoad: false, theme: 'base', look: 'handDrawn',
+        fontFamily: "'Architects Daughter', sans-serif",
+        themeVariables: {
+          primaryColor:'#efe9fb', primaryBorderColor:'#33333a', primaryTextColor:'#2b2b33',
+          lineColor:'#5b3fb0', secondaryColor:'#f6f3fc', tertiaryColor:'#ffffff', fontSize:'15px'
+        }
+      });
+      // Render each diagram INDEPENDENTLY: one bad diagram must not blank the others, and the
+      // fallback must show the ORIGINAL source (mermaid mutates the node's textContent with its
+      // injected <style> CSS, so capture the source BEFORE running).
+      for (const node of [...document.querySelectorAll('.mermaid')]) {
+        const source = node.textContent;
+        try {
+          await m.default.run({ nodes: [node], suppressErrors: false });
+        } catch (err) {
+          console.error('mermaid diagram failed; showing its source:', err);
+          node.replaceWith(sourcePre(source));
+        }
+      }
+    })
+    .catch(err => {
+      console.error('mermaid library failed to load; showing diagram sources:', err);
+      document.querySelectorAll('.mermaid').forEach(d => d.replaceWith(sourcePre(d.textContent)));
+    });
+})();
+</script>
+</body>
+</html>
