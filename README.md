@@ -2,6 +2,16 @@
 
 **README tells; SEEME shows.**
 
+> Don't just read the repo — **see** it.
+
+```mermaid
+flowchart LR
+    D["📄 Docs<br/>PRD · specs · plans"] --> S(["✳️ seeme"])
+    C["💻 Codebase<br/>screens · routes · schema"] --> S
+    S -->|writes| M["📘 SEEME.md<br/>beside README.md"]
+    M -->|renders| H["🖼️ SEEME.html<br/>shareable · hand-drawn"]
+```
+
 seeme is an agent-native toolkit for visual product understanding in repo docs.
 
 It has two skills:
@@ -78,3 +88,7 @@ Directory scans require `--all` and are bounded to Markdown files under the requ
 The synthesis is inherently an LLM task, so seeme is **skill-first**: `skills/seeme/SKILL.md` and
 `skills/visualize/SKILL.md` are the instructions an agent follows. See `docs/PRD.md` and the
 convention in `docs/patterns/UX_MD_MERMAID.md`. seeme dogfoods itself — see `SEEME.md`.
+
+## License
+
+Dual-licensed under either **[Apache-2.0](LICENSE-APACHE)** or **[MIT](LICENSE-MIT)** at your option.
