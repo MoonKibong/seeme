@@ -1,16 +1,12 @@
 # seeme
 
+<p align="center">
+  <img src="assets/seeme-card.png" alt="seeme — turn a repo's docs and code into a visual companion you see instead of read" width="840">
+</p>
+
 **README tells; SEEME shows.**
 
 > Don't just read the repo — **see** it.
-
-```mermaid
-flowchart LR
-    D["📄 Docs<br/>PRD · specs · plans"] --> S(["✳️ seeme"])
-    C["💻 Codebase<br/>screens · routes · schema"] --> S
-    S -->|writes| M["📘 SEEME.md<br/>beside README.md"]
-    M -->|renders| H["🖼️ SEEME.html<br/>shareable · hand-drawn"]
-```
 
 seeme is an agent-native toolkit for visual product understanding in repo docs.
 

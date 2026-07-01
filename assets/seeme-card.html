@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#2b2b33; --paper:#fcfcfb; --line:#33333a; --panel:#fff;
+    --accent:#7c5cd6; --accent-ink:#5b3fb0; --accent-soft:#efe9fb;
+    --shadow:rgba(60,50,90,.16);
+    --hand:'Architects Daughter',ui-rounded,system-ui,sans-serif;
+    --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+    --rough:16px 11px 18px 12px/12px 17px 11px 16px;
+    --rough-sm:9px 6px 10px 7px/7px 10px 6px 9px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{width:1200px;height:630px;overflow:hidden}
+  body{
+    background:var(--paper); color:var(--ink); font-family:var(--hand);
+    background-image:radial-gradient(rgba(90,70,150,.08) 1px,transparent 1px);
+    background-size:26px 26px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .card{
+    width:1112px; height:548px; background:var(--panel);
+    border:3px solid var(--line); border-radius:var(--rough);
+    box-shadow:12px 13px 0 var(--shadow); transform:rotate(-.5deg);
+    overflow:hidden; display:flex; flex-direction:column;
+  }
+  .bar{display:flex; align-items:center; gap:12px; padding:16px 26px;
+    border-bottom:3px solid var(--line); background:var(--accent-soft)}
+  .dot{width:20px;height:20px;border-radius:50%;border:2px solid var(--line)}
+  .r{background:#ff7b72}.y{background:#f5c451}.g{background:#7fce8b}
+  .bar .t{font-family:var(--mono);font-size:20px;color:#5a5247;margin-left:8px;letter-spacing:1px}
+  .body{flex:1; padding:30px 46px 26px; display:flex; flex-direction:column; justify-content:space-between}
+  .hero{display:flex; align-items:baseline; gap:26px}
+  .word{font-size:118px; line-height:.9; color:var(--accent-ink); letter-spacing:2px}
+  .motto{font-size:34px; color:var(--ink)}
+  .motto b{color:var(--accent-ink)}
+  .sub{font-family:var(--mono); font-size:21px; color:#6b6357; margin-top:2px}
+  .flow{display:flex; align-items:center; gap:14px; margin:6px 0 2px}
+  .box{border:2.5px solid var(--line); border-radius:var(--rough-sm); background:#fffdf9;
+    padding:12px 16px; font-size:23px; box-shadow:4px 4px 0 var(--shadow); white-space:nowrap}
+  .box .k{font-family:var(--mono); font-size:15px; color:#6b6357; display:block; margin-top:2px}
+  .box.accent{background:var(--accent-soft); border-color:var(--accent-ink); color:var(--accent-ink)}
+  .arw{font-family:var(--mono); font-size:30px; color:var(--accent-ink)}
+  .stack{display:flex; flex-direction:column; gap:8px}
+  .foot{display:flex; align-items:center; justify-content:space-between; border-top:2.5px dashed #cfc4e8; padding-top:16px}
+  .tag{font-size:30px; color:var(--ink)} .tag b{color:var(--accent-ink)}
+  .url{font-family:var(--mono); font-size:20px; background:var(--barDark,#33333a); color:#fdfdfb;
+    border-radius:var(--rough-sm); padding:8px 15px}
+  .badge{font-family:var(--mono);font-size:16px;background:var(--accent);color:#fff;
+    padding:4px 12px;border-radius:22px;transform:rotate(-1.5deg);margin-left:14px}
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="bar">
+      <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+      <span class="t">README&nbsp;&nbsp;→&nbsp;&nbsp;SEE ME</span>
+      <span class="badge">open source · Apache-2.0</span>
+    </div>
+    <div class="body">
+      <div>
+        <div class="hero">
+          <div class="word">seeme</div>
+          <div>
+            <div class="motto">README tells; <b>SEEME shows.</b></div>
+            <div class="sub">visual documentation from your repo's docs + code</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flow">
+        <div class="stack">
+          <div class="box">📄 Docs<span class="k">PRD · specs · plans</span></div>
+          <div class="box">💻 Code<span class="k">screens · routes · schema</span></div>
+        </div>
+        <span class="arw">─►</span>
+        <div class="box accent">✳️ seeme</div>
+        <span class="arw">─►</span>
+        <div class="box">📘 SEEME.md<span class="k">beside README.md</span></div>
+        <span class="arw">─►</span>
+        <div class="box">🖼️ SEEME.html<span class="k">shareable card</span></div>
+      </div>
+
+      <div class="foot">
+        <div class="tag">Don't just read the repo — <b>see it.</b></div>
+        <div class="url">github.com/MoonKibong/seeme</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
