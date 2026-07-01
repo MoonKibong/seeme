@@ -33,6 +33,9 @@ A whole-product SEEME.md repeats parts 2–6 per major surface, with one shared 
   treats them as HTML tags and eats the text. Write `{slug}` or `SLUG`, not `<slug>`. Avoid parens in
   participant aliases (`participant DB as SQLite truth`, not `SQLite (truth)`); parens inside a
   message line are usually fine.
+- **No `;` anywhere in Mermaid**: Mermaid treats `;` as a statement separator, so a `;` inside a
+  sequence message (or any label) truncates the statement and throws a parse error. Use a comma,
+  `and`, or a line break — write `synthesize and validate`, not `synthesize; validate`.
 - **Edge labels**: avoid a bare `/` (e.g. write `slash` or `run` instead of `/`).
 - **Fences**: every ```mermaid block must be closed; keep the total count of ``` even.
 - **Validate**: if a `mmdc` (mermaid CLI) is installed, render each block to catch errors; otherwise

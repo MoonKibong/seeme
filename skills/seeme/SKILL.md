@@ -98,6 +98,8 @@ become rendered SVG diagrams with graceful fallback.
      `loop`, `alt`, `opt`, `par`, `and`, `end`, `note`, `rect`, `activate`, `deactivate`, `break`,
      `critical`, `box`, `actor`, `participant`. e.g. a participant id `LOOP` is parsed as the `loop`
      block keyword and breaks the diagram — use `AGL`/`AGENTLOOP` with `as agent_loop` for display.
+   - **No `;` anywhere in Mermaid** — it is a statement separator, so a `;` in a sequence message or
+     label truncates it and throws a parse error. Use a comma, `and`, or a line break.
    - **Balanced ``` fences**; each ```mermaid block closed. Edge labels: avoid bare `/` (use a word).
    - If a `mmdc` (mermaid CLI) is available, render each block to catch errors; else sanity-check the
      above by eye.

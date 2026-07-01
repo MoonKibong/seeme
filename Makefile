@@ -50,6 +50,7 @@ lint-mermaid:
 	@awk 'BEGIN { fences = 0 } /^```/ { fences++ } END { if (fences % 2) { print "unbalanced markdown fences"; exit 1 } print "markdown fences balanced" }' SEEME.md docs/patterns/UX_MD_MERMAID.md "$(SEEME_SRC)/SKILL.md" "$(VISUALIZE_SRC)/SKILL.md"
 	@awk 'BEGIN { in_mermaid = 0; bad = 0 } /^```mermaid/ { in_mermaid = 1; next } /^```/ { in_mermaid = 0; next } in_mermaid && /[A-Za-z0-9_]+[[:space:]]*\[[^]]*[()]/ { print FILENAME ":" FNR ": flowchart node label contains parens"; bad = 1 } END { exit bad }' SEEME.md
 	@awk 'BEGIN { in_seq = 0; bad = 0 } /^```mermaid/ { in_mermaid = 1; in_seq = 0; next } in_mermaid && /^sequenceDiagram/ { in_seq = 1; next } /^```/ { in_mermaid = 0; in_seq = 0; next } in_seq && /<[^>]+>/ { print FILENAME ":" FNR ": sequence diagram contains angle brackets"; bad = 1 } END { exit bad }' SEEME.md
+	@awk 'BEGIN { in_mermaid = 0; bad = 0 } /^```mermaid/ { in_mermaid = 1; next } /^```/ { in_mermaid = 0; next } in_mermaid && /;/ { print FILENAME ":" FNR ": mermaid contains ; (statement separator — use a comma, and, or a line break)"; bad = 1 } END { exit bad }' SEEME.md
 	@echo "Mermaid lint OK"
 
 lint-visualize-blocks:

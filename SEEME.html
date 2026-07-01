@@ -257,7 +257,7 @@ sequenceDiagram
     User->>Agent: /seeme {scope or render}
     Agent->>Repo: discover PRD / plans / specs / code
     Repo-->>Agent: real screens, columns, keys, states
-    Agent->>Agent: synthesize 6-part view; validate Mermaid
+    Agent->>Agent: synthesize 6-part view and validate Mermaid
     Agent->>Out: create or update SEEME.md section-by-section
     Agent->>Out: render SEEME.html when requested
     Out-->>User: a visual spec and optional shareable HTML
