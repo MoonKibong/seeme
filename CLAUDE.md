@@ -37,7 +37,13 @@ future helper tooling stays thin and deterministic (doc discovery, Mermaid lint,
 See `docs/patterns/UX_MD_MERMAID.md` — the 6-part structure (product frame · IA/nav · Markdown
 wireframes · Mermaid flowchart · Mermaid sequence diagram · principles→evidence) plus the Mermaid
 gotchas that silently break rendering (parens/brackets in flowchart nodes, angle brackets in
-sequence messages, unbalanced fences).
+sequence messages, `;` statement-separators, unbalanced fences).
+
+## Public Repo — Leak Hygiene
+
+seeme is **public** open source (`github.com/MoonKibong/seeme`, **Apache-2.0**). Do **not** commit
+references to private sibling projects or their `../<project>/…` fixture paths — genericize examples
+and fixtures instead. Grep the tracked files for internal project names before every push.
 
 ## Layout
 
@@ -48,7 +54,9 @@ sequence messages, unbalanced fences).
 | `docs/PRD.md` | What seeme is and the SEEME.md contract |
 | `docs/patterns/UX_MD_MERMAID.md` | The presentation convention + Mermaid gotchas |
 | `SEEME.md` | seeme's own visual spec (dogfood) |
-| `Makefile` | Install the skills into `~/.claude/skills` and `~/.codex/skills` |
+| `assets/seeme-card.*` | Branded share card (PNG + HTML source); the README banner |
+| `LICENSE` | Apache-2.0 (this repo is public) |
+| `Makefile` | Install skills; `make check` runs the Mermaid/render/visualize lints |
 
 ## Commands
 
