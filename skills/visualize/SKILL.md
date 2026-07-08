@@ -23,6 +23,8 @@ smallest useful representation:
 - **Mermaid flowchart** for decisions, processes, state transitions, and task flows.
 - **Mermaid sequence diagram** for actor -> app -> service -> data-store handoffs.
 - **Mermaid data-flow or ER-style diagram** when entities, dependencies, or data movement matter.
+- **Markdown table** for flat tabular facts, scoring matrices, option comparisons, or columnar data
+  with no relationships to diagram.
 
 Preserve the surrounding prose. Do not rewrite the document unless a small bridge sentence is needed
 to introduce the visual.
@@ -55,6 +57,11 @@ to introduce the visual.
    - Process or decision path -> Mermaid flowchart.
    - Interaction across actors/systems -> Mermaid sequence diagram.
    - Data ownership or movement -> Mermaid data-flow or ER-style diagram.
+   - Flat values, scorecards, comparisons, or option matrices -> Markdown table.
+
+   Keep the block renderer-neutral: it should render acceptably in GitHub, common Markdown
+   previewers, Pandoc-style exporters, and `seeme render-md`. Do not rely on HTML, custom CSS, or a
+   SEEME-specific sketch transform for meaning.
 
 5. **Compute a managed block id.** Use a stable slug derived from target path, section/topic, and
    visual type, such as `README.md#getting-started-onboarding-flow`. Normalize to lowercase
@@ -73,6 +80,7 @@ to introduce the visual.
    - Keep fences balanced.
    - Flowchart node labels: no raw `(` `)` `[` `]` inside `[...]` or `{...}`.
    - Sequence messages/aliases: no `<...>` angle brackets; write `{slug}` or `SLUG`.
+   - No `;` in Mermaid labels/messages; use a comma, `and`, or a line break.
    - Edge labels: avoid a bare `/`; write `slash`, `run`, or another word.
    - If `mmdc` is available, render Mermaid blocks; otherwise sanity-check the gotchas by inspection.
 
@@ -92,6 +100,8 @@ flowchart TD
 - `id` is the stable deduplication key for repeated runs.
 - `source` identifies the doc path and heading, anchor, or nearby prose the visual explains.
 - The generated visual lives between `visualize:start` and `visualize:end`.
+- The managed comments are invisible control markers. Keep the visual itself as portable Markdown
+  inside the markers so renderers can ignore the comments and render the fenced or table content.
 - On repeat runs, match by `id`, then skip unchanged content or replace the managed block.
 
 ## Output discipline
@@ -102,6 +112,8 @@ flowchart TD
 - Wrap each generated visual in a managed `visualize:start` / `visualize:end` block.
 - Keep visuals faithful to implementation or source text; do not invent UI, fields, states, or flows.
 - Keep visuals plain Markdown and Mermaid so they render in GitHub and common Markdown previewers.
+- Preserve export compatibility: a managed block should remain useful when exported to standalone
+  HTML by `seeme render-md`, including Mermaid fences and Markdown tables.
 - Do not create or update `SEEME.md` or `SEEME.html`; route those requests to `seeme`.
 
 ## Anti-patterns
@@ -111,3 +123,5 @@ flowchart TD
 - Don't duplicate prose in diagram form without adding clarity.
 - Don't convert a whole doc into visuals; this skill augments targeted explanations.
 - Don't scan or mutate all docs unless the user explicitly selected `--all <directory>`.
+- Don't make a one-box ER/data diagram for flat tabular information; use a Markdown table.
+- Don't put renderer-only HTML/CSS inside managed blocks.

@@ -2,7 +2,7 @@
 name: seeme
 description: "Generate or update standalone SEEME.md, a repo-level or product-level visual companion that explains UI surfaces, codebase surfaces, data flows, actions, and sequences using Markdown wireframes and Mermaid diagrams; also render SEEME.md to shareable SEEME.html when the user asks to render, export, share, or produce HTML. Use when the user types /seeme, names the seeme skill, asks for SEEME.md or SEEME.html, or asks for a separate repo/product visual spec."
 user-invocable: true
-argument-hint: "[surface/feature/doc | render | --update | --html]"
+argument-hint: "[surface/feature/doc | render | render-md INPUT.md --output OUTPUT.html | --update | --html]"
 ---
 
 # seeme → SEEME.md and SEEME.html
@@ -17,7 +17,8 @@ plan, or spec, use the `visualize` skill instead.
 
 Use render mode when the user asks to render, export, share, or produce HTML from `SEEME.md`. Render
 mode generates or replaces **SEEME.html**, a shareable HTML rendering of the Markdown wireframes and
-Mermaid diagrams.
+Mermaid diagrams. Use generic Markdown render mode when the user explicitly asks to render an
+ordinary Markdown file, including one augmented by `visualize` managed Mermaid blocks.
 
 ## What you produce
 
@@ -28,13 +29,16 @@ natively by GitHub. Not prose-heavy: it *shows*.
 Render mode produces `SEEME.html` from `SEEME.md`. The HTML should be shareable, self-contained when
 practical, and visually sketch-like: Markdown sections become readable panels, UI wireframe fences
 become drawn DOM wireframes, terminal/tree fences become hand-drawn window cards, and Mermaid blocks
-become rendered SVG diagrams with graceful fallback.
+become rendered SVG diagrams with graceful fallback. Generic Markdown render mode produces a
+professional, wide standalone HTML document from any Markdown input without SEEME-specific
+wireframe transforms.
 
 ## Workflow
 
 1. **Choose mode.**
    - Default: generate or update `SEEME.md`.
    - `render`: generate or replace `SEEME.html` from the existing `SEEME.md`.
+   - `render-md`: render an explicit ordinary Markdown file to an explicit HTML path.
    - `--html`: refresh `SEEME.md`, then render `SEEME.html`.
 
 2. **Scope.** If the user named a surface/feature/doc, cover that in `SEEME.md`. Otherwise cover the
@@ -112,6 +116,16 @@ become rendered SVG diagrams with graceful fallback.
    `SEEME.md`. The template must render Markdown before Mermaid, dynamically import Mermaid with
    `.catch()`, and degrade failed diagrams to readable `<pre>` blocks.
 
+8. **Render ordinary Markdown when explicitly requested.** Use
+   `assets/render-seeme.mjs render-md INPUT.md --output OUTPUT.html --title "TITLE"`. Do not require
+   the input to be named `SEEME.md`, do not mutate the input, and do not apply sketch/wireframe
+   transforms. This path is for deterministic export of Markdown as the source of truth, including
+   Markdown augmented by `visualize` blocks:
+   `<!-- visualize:start id="..." source="..." -->`, a fenced `mermaid` block, and
+   `<!-- visualize:end -->`. The comments remain harmless HTML comments, while the fenced Mermaid
+   source is emitted for browser rendering. If the HTML template provides the document title, avoid
+   rendering a duplicate first H1 when it is the same title.
+
 ## Render contract
 
 - Use `skills/seeme/assets/render-seeme.mjs` to generate `SEEME.html`; it uses
@@ -155,6 +169,10 @@ become rendered SVG diagrams with graceful fallback.
   data rows at those same offsets. Do not split each row independently.
 - Create the sketch look with uneven per-corner `border-radius`, dark strokes, and offset shadows;
   keep text crisp and do not use rough.js or SVG displacement filters.
+- Generic Markdown HTML export uses `render-md-template.html`, not the sketch template. It must
+  normalize both common Mermaid HTML shapes (`pre.mermaid` and `pre > code.language-mermaid`) into
+  `.mermaid` blocks before calling `mermaid.run`, keep tables horizontally scrollable on mobile, and
+  keep comments from `visualize` managed blocks harmless.
 
 ## Output discipline
 
@@ -164,6 +182,11 @@ become rendered SVG diagrams with graceful fallback.
   by `/seeme`, plus the commit/date so staleness is visible.
 - `SEEME.html` is derived output. Regenerate it from `SEEME.md` when requested; do not let it become
   the source of truth.
+- Generic Markdown HTML is also derived output. Regenerate it from its source `.md` file with
+  `assets/render-seeme.mjs render-md INPUT.md --output OUTPUT.html --title "TITLE"`; keep generation
+  in `visualize` or `seeme` authoring, not in the renderer. The renderer may adapt presentation
+  chrome such as duplicate title removal, but it must not change the source Markdown or synthesize
+  new visual content.
 - Prefer explicit fence info strings in generated Markdown: `wireframe`, `terminal`, and `mermaid`
   (`screen` aliases `wireframe`; `console`, `tree`, and `diagram` alias `terminal` for verbatim mono
   content). Plain legacy fences remain valid, but deterministic tags make rendering reliable.

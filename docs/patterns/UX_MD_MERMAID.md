@@ -68,6 +68,13 @@ A whole-product SEEME.md repeats parts 2–6 per major surface, with one shared 
 ## HTML render contract
 
 - `SEEME.html` is derived from `SEEME.md`; do not treat it as canonical.
+- Ordinary Markdown HTML exports are derived from their explicit source `.md` file; do not mutate the
+  Markdown during render, and do not apply SEEME sketch transforms to non-SEEME docs. Export chrome
+  can remove a duplicate first H1 when it matches the HTML title, but that is presentation only.
+- `visualize` managed blocks render as their fenced Mermaid content. The surrounding
+  `visualize:start` / `visualize:end` comments are harmless HTML comments, not visible content.
+- Browser Mermaid setup must normalize both common Markdown-export shapes, `pre.mermaid` and
+  `pre > code.language-mermaid`, before calling `mermaid.run`.
 - Use the render helper when available so Mermaid diagrams are embedded as static SVGs if `mmdc`
   exists; otherwise keep runtime Mermaid as an explicit fallback.
 - Render Markdown before loading Mermaid so a slow or blocked Mermaid CDN cannot blank the page.

@@ -19,6 +19,8 @@ It has two skills:
 
 `seeme` discovers repo knowledge — PRDs, plans, specs, code — and writes/refreshes **`SEEME.md`**.
 It can also render that spec into a shareable **`SEEME.html`**.
+The same renderer can export ordinary Markdown files, including docs augmented by `visualize`
+managed Mermaid blocks, to standalone HTML without changing the source Markdown.
 
 `visualize` augments text-centric docs such as READMEs, getting-started guides, onboarding docs,
 design docs, PRDs, plans, and specs with compact visual blocks. Re-running it on the same doc
@@ -40,6 +42,8 @@ After installing, in any repo:
 /seeme --update            # Claude Code: refresh an existing SEEME.md from current docs/code
 /seeme render              # Claude Code: generate or replace SEEME.html from SEEME.md
 /seeme --html              # Claude Code: refresh SEEME.md, then render SEEME.html
+/seeme render-md INPUT.md --output OUTPUT.html --title "Title"
+                           # Claude Code: export ordinary Markdown to HTML
 /visualize README.md       # Claude Code: insert a visual block into an existing doc
 /visualize docs/guide.md onboarding
                            # Claude Code: target one section/topic
@@ -73,6 +77,10 @@ fake screen.
 When `seeme` render mode is requested, you also get **`SEEME.html`**: derived output from
 `SEEME.md` with rendered diagrams and sketch-style wireframe presentation for sharing. Markdown
 renders even if Mermaid is slow or blocked; failed diagrams degrade to readable source blocks.
+For ordinary Markdown exports, use the generic render path:
+`skills/seeme/assets/render-seeme.mjs render-md INPUT.md --output OUTPUT.html --title "Title"`.
+It keeps the Markdown canonical, emits a wide professional HTML document, makes tables responsive,
+and normalizes Mermaid fences from `visualize` blocks in the browser.
 
 When `visualize` is requested, the target document keeps its prose and gains a nearby visual block
 that makes a UI, process, action sequence, or data flow easier to understand. The block is wrapped in

@@ -36,6 +36,7 @@ reinstall: uninstall install
 check:
 	@test -f "$(SEEME_SRC)/SKILL.md" && echo "source OK: $(SEEME_SRC)/SKILL.md" || (echo "MISSING $(SEEME_SRC)/SKILL.md" && exit 1)
 	@test -f "$(SEEME_SRC)/assets/render-template.html" && echo "template OK: $(SEEME_SRC)/assets/render-template.html" || (echo "MISSING $(SEEME_SRC)/assets/render-template.html" && exit 1)
+	@test -f "$(SEEME_SRC)/assets/render-md-template.html" && echo "markdown template OK: $(SEEME_SRC)/assets/render-md-template.html" || (echo "MISSING $(SEEME_SRC)/assets/render-md-template.html" && exit 1)
 	@test -f "$(SEEME_SRC)/assets/render-seeme.mjs" && echo "renderer OK: $(SEEME_SRC)/assets/render-seeme.mjs" || (echo "MISSING $(SEEME_SRC)/assets/render-seeme.mjs" && exit 1)
 	@test -f "$(VISUALIZE_SRC)/SKILL.md" && echo "source OK: $(VISUALIZE_SRC)/SKILL.md" || (echo "MISSING $(VISUALIZE_SRC)/SKILL.md" && exit 1)
 	@head -6 "$(SEEME_SRC)/SKILL.md"
@@ -45,6 +46,7 @@ check:
 	@$(MAKE) lint-render-template
 	@node scripts/lint-mermaid-source.mjs SEEME.md docs/patterns/UX_MD_MERMAID.md
 	@node scripts/test-render-template.mjs
+	@node scripts/test-render-md.mjs
 
 lint-mermaid:
 	@awk 'BEGIN { fences = 0 } /^```/ { fences++ } END { if (fences % 2) { print "unbalanced markdown fences"; exit 1 } print "markdown fences balanced" }' SEEME.md docs/patterns/UX_MD_MERMAID.md "$(SEEME_SRC)/SKILL.md" "$(VISUALIZE_SRC)/SKILL.md"
@@ -78,4 +80,7 @@ lint-render-template:
 	@grep -q "tableByHeaderOffsets" "$(SEEME_SRC)/assets/render-template.html"
 	@grep -q "mmdc" "$(SEEME_SRC)/assets/render-seeme.mjs"
 	@grep -q "seeme-mermaid-svg" "$(SEEME_SRC)/assets/render-seeme.mjs"
+	@grep -q "render-md" "$(SEEME_SRC)/assets/render-seeme.mjs"
+	@grep -q "querySelectorAll(\"pre.mermaid, pre > code.language-mermaid\")" "$(SEEME_SRC)/assets/render-md-template.html"
+	@grep -q "mermaid.run({ querySelector: \".mermaid\" })" "$(SEEME_SRC)/assets/render-md-template.html"
 	@echo "render template OK"

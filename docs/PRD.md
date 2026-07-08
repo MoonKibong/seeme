@@ -12,7 +12,8 @@ the reader moves on. README explains in prose; nothing *shows* the UIs.
 
 - **`seeme`** reads repo knowledge and produces **`SEEME.md`**: a standalone visual explanation of
   the product's UIs and how they work, using Markdown wireframes + Mermaid diagrams. It can also
-  render that source into **`SEEME.html`** for sharing.
+  render that source into **`SEEME.html`** for sharing, or render an explicit ordinary Markdown file
+  to standalone HTML when export is requested.
 - **`visualize`** edits an existing text-centric doc in place, inserting a compact visual block near
   the relevant prose.
 
@@ -37,6 +38,10 @@ the reader moves on. README explains in prose; nothing *shows* the UIs.
 - `SEEME.html` is derived output from `SEEME.md`, regenerated on request for sharing and discussion.
 - `SEEME.html` renders Markdown independently of Mermaid, loads Mermaid dynamically with fallback,
   and draws genuine `wireframe` screens as sketch-style DOM while showing verbatim ASCII faithfully.
+- Generic Markdown HTML export is derived output from an explicit source `.md` file. It preserves the
+  Markdown unchanged, supports `visualize` managed Mermaid blocks, emits wide executive-readable HTML,
+  applies no SEEME-specific wireframe transforms, and avoids duplicate title chrome when the source
+  already starts with the same H1.
 
 ## The in-place visualization contract
 
@@ -55,6 +60,8 @@ the reader moves on. README explains in prose; nothing *shows* the UIs.
   block; it must not duplicate the same diagram.
 - Surrounding prose, headings, and anchors stay stable unless a short bridge sentence is needed.
 - The output remains plain Markdown + Mermaid and follows the same Mermaid gotchas convention.
+- Managed blocks are renderer-neutral: comments provide update identity, while the visual content
+  remains portable Markdown, Mermaid, or tables that work in GitHub and standalone HTML export.
 
 ## Why skill-first (not a binary)
 
@@ -77,6 +84,7 @@ script if it clearly beats agent instructions — but the skill stays the produc
 
 A reader (human or agent) opens `SEEME.md` and understands the product's surfaces and flows in
 minutes, on GitHub, without launching anything — and an agent can refresh it in one command as the
-product evolves. A team can render `SEEME.html` when they need a shareable visual artifact. A reader
-of an existing doc can understand a specific UI, process, or data flow faster because `visualize`
-placed a compact, managed diagram at the point of need without duplicating it on later runs.
+product evolves. A team can render `SEEME.html`, or export a specific Markdown brief to HTML, when
+they need a shareable visual artifact. A reader of an existing doc can understand a specific UI,
+process, or data flow faster because `visualize` placed a compact, managed diagram at the point of
+need without duplicating it on later runs.

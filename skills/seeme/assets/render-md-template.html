@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{TITLE}}</title>
+<!-- Derived output: regenerated from Markdown by seeme render-md. Do not hand-edit as canonical. -->
+<style>
+:root {
+  --bg: #f4f6f8;
+  --paper: #ffffff;
+  --ink: #1f2933;
+  --muted: #64748b;
+  --line: #d7dde5;
+  --soft: #f7f8fa;
+  --head: #eef4f7;
+  --accent: #155e75;
+  --accent-soft: #e6f3f6;
+  --shadow: rgba(15, 23, 42, .08);
+  --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, "Helvetica Neue", Arial, sans-serif;
+}
+* { box-sizing: border-box; }
+html { background: var(--bg); color: var(--ink); }
+body {
+  margin: 0;
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.65;
+}
+.page {
+  max-width: 1120px;
+  margin: 32px auto;
+  padding: 44px 56px 56px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  box-shadow: 0 18px 45px var(--shadow);
+}
+header {
+  margin-bottom: 28px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--line);
+}
+header .eyebrow {
+  margin: 0 0 8px;
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+header h1 {
+  margin: 0;
+  font-size: 34px;
+  line-height: 1.18;
+  letter-spacing: 0;
+}
+main > h1:first-child { margin-top: 0; }
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.25;
+  letter-spacing: 0;
+}
+h1 { margin: 34px 0 14px; font-size: 34px; }
+h2 { margin: 32px 0 12px; font-size: 25px; padding-bottom: 6px; border-bottom: 1px solid var(--line); }
+h3 { margin: 24px 0 10px; font-size: 20px; }
+h4 { margin: 18px 0 8px; font-size: 17px; }
+p { margin: 10px 0; }
+a { color: var(--accent); }
+strong { color: #111827; }
+blockquote {
+  margin: 18px 0;
+  padding: 12px 18px;
+  background: var(--soft);
+  border-left: 4px solid var(--accent);
+  color: #344054;
+}
+ul, ol { padding-left: 25px; margin: 10px 0 16px; }
+li { margin: 4px 0; }
+code {
+  font-family: var(--mono);
+  font-size: .88em;
+  background: #eef2f6;
+  border: 1px solid #e1e7ef;
+  border-radius: 4px;
+  padding: 1px 5px;
+}
+pre {
+  margin: 18px 0;
+  padding: 16px 18px;
+  overflow-x: auto;
+  background: #0f172a;
+  color: #e5e7eb;
+  border-radius: 7px;
+}
+pre code {
+  display: block;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  color: inherit;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.table-scroll {
+  width: 100%;
+  margin: 18px 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+table {
+  width: 100%;
+  min-width: 680px;
+  border-collapse: collapse;
+  background: #fff;
+  font-size: 14px;
+}
+th, td {
+  border: 1px solid var(--line);
+  padding: 9px 11px;
+  text-align: left;
+  vertical-align: top;
+}
+th {
+  background: var(--head);
+  color: #24313f;
+  font-weight: 700;
+}
+tr:nth-child(even) td { background: #fbfcfd; }
+.mermaid {
+  margin: 22px 0;
+  padding: 20px;
+  overflow-x: auto;
+  text-align: center;
+  background: var(--soft);
+  border: 1px solid var(--line);
+  border-radius: 7px;
+}
+.mermaid svg {
+  max-width: 100%;
+  height: auto;
+}
+footer {
+  margin-top: 42px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 12px;
+}
+@media (max-width: 760px) {
+  body { font-size: 15px; }
+  .page {
+    margin: 0;
+    padding: 24px 18px 38px;
+    border-left: 0;
+    border-right: 0;
+    box-shadow: none;
+  }
+  header h1, h1 { font-size: 28px; }
+  h2 { font-size: 22px; }
+  table { min-width: 620px; }
+}
+</style>
+</head>
+<body>
+<article class="page">
+  <header>
+    <p class="eyebrow">Markdown export</p>
+    <h1>{{TITLE}}</h1>
+  </header>
+  <main>
+{{BODY}}
+  </main>
+  <footer>Rendered from <code>{{SOURCE_FILE}}</code>. Source Markdown remains canonical.</footer>
+</article>
+<script type="module">
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+  mermaid.initialize({
+    startOnLoad: false,
+    theme: "base",
+    themeVariables: {
+      primaryColor: "#e6f3f6",
+      primaryTextColor: "#1f2933",
+      primaryBorderColor: "#155e75",
+      lineColor: "#5b6673",
+      secondaryColor: "#f7f8fa",
+      tertiaryColor: "#ffffff"
+    }
+  });
+  document.addEventListener("DOMContentLoaded", async () => {
+    document.querySelectorAll("pre.mermaid, pre > code.language-mermaid").forEach((node) => {
+      const div = document.createElement("div");
+      div.className = "mermaid";
+      div.textContent = node.textContent;
+      const target = node.tagName.toLowerCase() === "code" ? node.parentElement : node;
+      target.replaceWith(div);
+    });
+    await mermaid.run({ querySelector: ".mermaid" });
+  });
+</script>
+</body>
+</html>
