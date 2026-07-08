@@ -1,6 +1,6 @@
 ---
 name: seeme
-description: "Generate or update standalone SEEME.md, a repo-level or product-level visual companion that explains UI surfaces, codebase surfaces, data flows, actions, and sequences using Markdown wireframes and Mermaid diagrams; also render SEEME.md to shareable SEEME.html when the user asks to render, export, share, or produce HTML. Use when the user types /seeme, names the seeme skill, asks for SEEME.md or SEEME.html, or asks for a separate repo/product visual spec."
+description: "Generate or update standalone SEEME.md, a repo-level or product-level visual companion that explains UI surfaces, codebase surfaces, data flows, actions, and sequences using Markdown wireframes and Mermaid diagrams; render SEEME.md to SEEME.html; or export an explicit ordinary Markdown file to standalone HTML with Mermaid support. Use when the user types /seeme, names the seeme skill, asks for SEEME.md or SEEME.html, asks to render Markdown to HTML, or asks for a separate repo/product visual spec."
 user-invocable: true
 argument-hint: "[surface/feature/doc | render | render-md INPUT.md --output OUTPUT.html | --update | --html]"
 ---

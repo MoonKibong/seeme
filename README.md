@@ -14,7 +14,7 @@ It has two skills:
 
 | Skill | Output | Use when |
 |-------|--------|----------|
-| `seeme` | `SEEME.md`, optionally `SEEME.html` | You want a standalone visual companion for a repo or product. |
+| `seeme` | `SEEME.md`, optionally `SEEME.html` or generic Markdown HTML | You want a standalone visual companion or a Markdown-to-HTML export. |
 | `visualize` | Edits an existing doc in place | You want a wireframe, flowchart, sequence, or data-flow diagram inserted near relevant prose. |
 
 `seeme` discovers repo knowledge — PRDs, plans, specs, code — and writes/refreshes **`SEEME.md`**.
@@ -52,8 +52,9 @@ After installing, in any repo:
 
 In Codex, choose `seeme` or `visualize` from `/skills`, or ask naturally:
 *"seeme this repo"*, *"render SEEME.md"*, *"add an onboarding flow diagram to README.md"*, or
-*"insert a UI wireframe into docs/getting-started.md"*. If you ask only for `visualize` without a
-target, the agent should ask you to choose a specific file or an explicit `--all <directory>` scan.
+*"insert a UI wireframe into docs/getting-started.md"*. For generic Markdown export, ask
+*"render this Markdown file to HTML"* or use `render-md`. If you ask only for `visualize` without
+a target, the agent should ask you to choose a specific file or an explicit `--all <directory>` scan.
 
 ## What you get
 

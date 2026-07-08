@@ -10,7 +10,9 @@ const markdownTemplatePath = path.join(here, 'render-md-template.html');
 
 const args = process.argv.slice(2);
 
-if (args[0] === 'render-md') {
+if (args[0] === '--help' || args[0] === '-h') {
+  usage(0);
+} else if (args[0] === 'render-md') {
   renderMarkdownCommand(args.slice(1));
 } else {
   renderSeemeCommand(args);
@@ -79,7 +81,9 @@ function requireValue(args, index, flag) {
 
 function usage(code, message = '') {
   if (message) console.error(message);
-  console.error('usage: render-seeme.mjs render-md INPUT.md --output OUTPUT.html [--title TITLE]');
+  console.error('usage:');
+  console.error('  render-seeme.mjs [SEEME.md] [SEEME.html]');
+  console.error('  render-seeme.mjs render-md INPUT.md --output OUTPUT.html [--title TITLE]');
   process.exit(code);
 }
 

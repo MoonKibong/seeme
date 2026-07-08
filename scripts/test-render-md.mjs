@@ -65,4 +65,10 @@ if (titleCount !== 1) {
   throw new Error(`expected one rendered title, got ${titleCount}`);
 }
 
+const help = spawnSync(process.execPath, [renderer, '--help'], { encoding: 'utf8' });
+if (help.status !== 0) throw new Error(`--help exited with ${help.status}`);
+if (!help.stderr.includes('render-md INPUT.md --output OUTPUT.html') || !help.stderr.includes('[SEEME.md] [SEEME.html]')) {
+  throw new Error('expected help text to describe both SEEME and render-md usage');
+}
+
 console.log('render-md regression OK');
