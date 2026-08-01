@@ -93,7 +93,7 @@ wireframe transforms.
    each section from current docs/code, and flag what changed. Do not clobber hand-written notes
    blindly — merge section by section.
 
-6. **Validate the Mermaid** before finishing (these silently break rendering):
+6. **Validate and self-correct** before finishing (these silently break rendering):
    - Flowchart node labels: **no raw `(` `)` `[` `]`** inside `[...]`/`{...}` — use `<br/>` for line
      breaks, spell out or drop punctuation, write `orders.` not `orders[]`.
    - Sequence diagram messages/aliases: **no `<...>` angle brackets** (render as HTML tags) — write
@@ -107,6 +107,13 @@ wireframe transforms.
    - **Balanced ``` fences**; each ```mermaid block closed. Edge labels: avoid bare `/` (use a word).
    - If a `mmdc` (mermaid CLI) is available, render each block to catch errors; else sanity-check the
      above by eye.
+   - Run `node assets/md-repair.mjs SEEME.md --fix` (path relative to this skill directory) as a
+     deterministic self-correction pass: it auto-repairs Mermaid node-shape/edge-label quoting,
+     unclosed delimiters, and malformed Markdown tables (missing separator row, ragged columns) in one
+     shot — no LLM re-generation, no retry loop. It is idempotent, so run it once and read the result;
+     re-running it again on the same input changes nothing. If it still exits non-zero after `--fix`,
+     the remaining issue needs a manual content fix (e.g. a literal `<token>` in a sequence message,
+     flagged with the offending line) — fix that by hand rather than looping on `--fix`.
 
 7. **Render HTML when requested.** Treat `SEEME.md` as the source of truth. Generate or replace
    `SEEME.html`; do not hand-edit it as canonical content. Prefer

@@ -76,13 +76,17 @@ to introduce the visual.
    - Never create a second managed block with the same `id` unless the user explicitly requests an
      alternative visual; then use a distinct `id`.
 
-7. **Validate Markdown and Mermaid.**
+7. **Validate and self-correct Markdown and Mermaid.**
    - Keep fences balanced.
    - Flowchart node labels: no raw `(` `)` `[` `]` inside `[...]` or `{...}`.
    - Sequence messages/aliases: no `<...>` angle brackets; write `{slug}` or `SLUG`.
    - No `;` in Mermaid labels/messages; use a comma, `and`, or a line break.
    - Edge labels: avoid a bare `/`; write `slash`, `run`, or another word.
    - If `mmdc` is available, render Mermaid blocks; otherwise sanity-check the gotchas by inspection.
+   - Run `node assets/md-repair.mjs TARGET.md --fix` (path relative to this skill directory) for a
+     deterministic, idempotent self-correction pass over Mermaid blocks and Markdown tables (see
+     `skills/seeme/SKILL.md` step 6 for what it fixes). If it still fails after `--fix`, fix the
+     flagged issue by hand rather than re-running `--fix`.
 
 ## Managed block format
 

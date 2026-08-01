@@ -40,6 +40,12 @@ A whole-product SEEME.md repeats parts 2–6 per major surface, with one shared 
 - **Fences**: every ```mermaid block must be closed; keep the total count of ``` even.
 - **Validate**: if a `mmdc` (mermaid CLI) is installed, render each block to catch errors; otherwise
   grep for node labels containing `(`/`[` and for `<` in sequence blocks.
+- **Self-correct**: run `assets/md-repair.mjs TARGET.md --fix` (ships with the `seeme`/`visualize`
+  skills) before finishing. It's a deterministic, single-pass repair — no LLM re-generation, no retry
+  loop — for the node-label/edge-label/subgraph-title quoting and unclosed-delimiter classes of error
+  above, plus malformed Markdown tables (missing separator row, ragged columns). It leaves content
+  errors it can't safely guess at (e.g. a literal `<token>` in a sequence message) flagged for a manual
+  fix rather than mangling them.
 
 ## Wireframe style
 

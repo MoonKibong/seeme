@@ -19,6 +19,9 @@ install:
 	@cp -R "$(SEEME_SRC)" "$(CODEX_SKILLS)/"
 	@cp -R "$(VISUALIZE_SRC)" "$(CLAUDE_SKILLS)/"
 	@cp -R "$(VISUALIZE_SRC)" "$(CODEX_SKILLS)/"
+	@mkdir -p "$(VISUALIZE_CLAUDE_DST)/assets" "$(VISUALIZE_CODEX_DST)/assets"
+	@cp "$(SEEME_SRC)/assets/md-repair.mjs" "$(VISUALIZE_CLAUDE_DST)/assets/"
+	@cp "$(SEEME_SRC)/assets/md-repair.mjs" "$(VISUALIZE_CODEX_DST)/assets/"
 	@echo "Installed seeme and visualize skills:"
 	@echo "  -> $(SEEME_CLAUDE_DST)/SKILL.md"
 	@echo "  -> $(SEEME_CODEX_DST)/SKILL.md"
@@ -38,6 +41,7 @@ check:
 	@test -f "$(SEEME_SRC)/assets/render-template.html" && echo "template OK: $(SEEME_SRC)/assets/render-template.html" || (echo "MISSING $(SEEME_SRC)/assets/render-template.html" && exit 1)
 	@test -f "$(SEEME_SRC)/assets/render-md-template.html" && echo "markdown template OK: $(SEEME_SRC)/assets/render-md-template.html" || (echo "MISSING $(SEEME_SRC)/assets/render-md-template.html" && exit 1)
 	@test -f "$(SEEME_SRC)/assets/render-seeme.mjs" && echo "renderer OK: $(SEEME_SRC)/assets/render-seeme.mjs" || (echo "MISSING $(SEEME_SRC)/assets/render-seeme.mjs" && exit 1)
+	@test -f "$(SEEME_SRC)/assets/md-repair.mjs" && echo "self-correction OK: $(SEEME_SRC)/assets/md-repair.mjs" || (echo "MISSING $(SEEME_SRC)/assets/md-repair.mjs" && exit 1)
 	@test -f "$(VISUALIZE_SRC)/SKILL.md" && echo "source OK: $(VISUALIZE_SRC)/SKILL.md" || (echo "MISSING $(VISUALIZE_SRC)/SKILL.md" && exit 1)
 	@head -6 "$(SEEME_SRC)/SKILL.md"
 	@head -6 "$(VISUALIZE_SRC)/SKILL.md"
@@ -45,8 +49,10 @@ check:
 	@$(MAKE) lint-visualize-blocks
 	@$(MAKE) lint-render-template
 	@node scripts/lint-mermaid-source.mjs SEEME.md docs/patterns/UX_MD_MERMAID.md
+	@node $(SEEME_SRC)/assets/md-repair.mjs SEEME.md docs/patterns/UX_MD_MERMAID.md
 	@node scripts/test-render-template.mjs
 	@node scripts/test-render-md.mjs
+	@node scripts/test-md-repair.mjs
 
 lint-mermaid:
 	@awk 'BEGIN { fences = 0 } /^```/ { fences++ } END { if (fences % 2) { print "unbalanced markdown fences"; exit 1 } print "markdown fences balanced" }' SEEME.md docs/patterns/UX_MD_MERMAID.md "$(SEEME_SRC)/SKILL.md" "$(VISUALIZE_SRC)/SKILL.md"
