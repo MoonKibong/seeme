@@ -1,0 +1,27 @@
+## Plan & Task Numbering Convention
+
+### Workflow (native harness)
+
+If your team uses a multi-agent orchestrator (planner/executor/reviewer personas with a built-in
+plan-quality gate and an implement→review→revise loop), drive plans and tasks through it directly
+rather than layering a second skill-based loop on top — that double-counts rounds and hides cost.
+Enable its native harness mode via its own config, not by wrapping a skill around a run.
+
+Track work with GitHub Issues for traceability:
+1. Plan doc (`docs/implementation/*_PLAN.md`): `gh issue create -R {owner}/{repo} --label plan --title "{title}"` → `P#N`; put `plan_id: P#N` in the frontmatter.
+2. Implementation: `gh issue create -R {owner}/{repo} --label task --title "{title}"` → `T#N`.
+3. Reference `T#N` in commit messages: `feat(T#N): description`.
+
+### Optional: operator authoring aids
+
+`/task-evaluate` and `/task-execute` are OPTIONAL aids for a human reviewing a plan in their own IDE before launching an order. They are NOT required and MUST NOT be invoked by autonomous personas when an orchestrator is already driving the work — the orchestrator's own implement→review→revise loop should own that, so nesting a skill loop inside it double-counts rounds and hides cost.
+
+### Numbering Source
+
+GitHub Issues per repo. Plans = `P#N` (label `plan`); tasks = `T#N` (label `task`). Cross-repo ref `{repo}#N`; in-repo `#N`. Offline fallback: repo-local sequential numbers, resolved on merge.
+
+### Rules
+
+- Do NOT retroactively renumber existing plans/tasks — apply to new work only.
+- Plan and task numbers are per-repo (not globally unique).
+- Use GitHub Issue labels (`plan`, `task`) to distinguish P# from T#.
